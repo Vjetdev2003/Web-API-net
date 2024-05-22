@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApiNet5.Controllers;
 
 namespace WebApiNet5.Data
 {
@@ -21,7 +23,11 @@ namespace WebApiNet5.Data
         public int? MaLoai {  get; set; }
         [ForeignKey("MaLoai")]
         public Loai Loai { get; set; }
-        
-
+        public ICollection<DonHangChiTiet> DonHangChiTiets { get; set; }
+        public HangHoa()
+        {
+            DonHangChiTiets = new HashSet<DonHangChiTiet>(); //Có thể dùng List hoặc HashSet sao cho
+            //đảm bảo thằng này null khi chưa có để đảm bảo là có danh sách rỗng
+        }
     }
 }
